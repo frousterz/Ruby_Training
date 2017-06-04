@@ -12,28 +12,23 @@
 #   about_triangle_project.rb
 # and
 #   about_triangle_project_2.rb
-#
 def triangle(a, b, c)
-  # Determine if a triangle is a triangle
-  # a + b > c
-  # b + c > a
-  # c + a > b
-  if a + b <= c || b + c <= a || c + a <= b
+  if [a, b, c].min == 0 ||
+      a + b <= c ||
+      b + c <= a ||
+      c + a <= b
     raise TriangleError
   end
-  # Determine if sides are positive
-  if a <= 0 || b <= 0 || c <= 0
-    raise TriangleError
-  end
-  # Find triangle type
-  if a == b && b == c
+  array_size = [a, b, c].uniq.size
+  case array_size
+  when 1
     :equilateral
-  elsif a == b || b == c || c == a
+  when 2
     :isosceles
   else
     :scalene
   end
-  end
+end
 
 # Error class used in part 2.  No need to change this code.
 class TriangleError < StandardError
