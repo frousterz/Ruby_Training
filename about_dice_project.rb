@@ -11,7 +11,7 @@ class DiceSet
   def roll(roll_times)
     @values.clear
     roll_times.times do
-      @values << rand(1..5)
+      @values << rand(1..6)
     end
   end
 end
@@ -42,15 +42,17 @@ class AboutDiceProject < Neo::Koan
   end
 
   def test_dice_values_should_change_between_rolls
-    dice = DiceSet.new
+    dice1 = DiceSet.new
 
-    dice.roll(5)
-    first_time = dice.values
+    dice1.roll(5)
+    first_time = dice1.values
 
-    dice.roll(5)
-    second_time = dice.values
+    dice2 = DiceSet.new
 
-    assert_equal first_time, second_time,
+    dice2.roll(5)
+    second_time = dice2.values
+
+    assert_not_equal first_time, second_time,
       "Two rolls should not be equal"
 
     # THINK ABOUT IT:
