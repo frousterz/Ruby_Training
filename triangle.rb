@@ -13,21 +13,14 @@
 # and
 #   about_triangle_project_2.rb
 def triangle(a, b, c)
-  if [a, b, c].min == 0 ||
+  sides_array = [a, b, c]
+  if sides_array.min == 0 ||
       a + b <= c ||
       b + c <= a ||
       c + a <= b
     raise TriangleError
   end
-  array_size = [a, b, c].uniq.size
-  case array_size
-  when 1
-    :equilateral
-  when 2
-    :isosceles
-  else
-    :scalene
-  end
+  [:equilateral, :isosceles, :scalene][sides_array.uniq.size - 1]
 end
 
 # Error class used in part 2.  No need to change this code.
