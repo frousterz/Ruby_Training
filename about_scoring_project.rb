@@ -36,7 +36,7 @@ def score(dice)
     element_count = dice.count(element)
     score += points(element, element_count)
   end
-  return score
+  score
 end
 
 def points(element, element_count)
