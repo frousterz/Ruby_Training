@@ -12,9 +12,15 @@
 #   about_triangle_project.rb
 # and
 #   about_triangle_project_2.rb
-#
 def triangle(a, b, c)
-  # WRITE THIS CODE
+  sides = [a, b, c]
+  if sides.min <= 0 ||
+      a + b <= c ||
+      b + c <= a ||
+      c + a <= b
+    raise TriangleError
+  end
+  [:equilateral, :isosceles, :scalene][sides.uniq.size - 1]
 end
 
 # Error class used in part 2.  No need to change this code.
