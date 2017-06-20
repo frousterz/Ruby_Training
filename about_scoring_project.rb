@@ -30,37 +30,25 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 # Your goal is to write the score method.
 
 def score(dice)
+  return 0 if dice.empty?
   score = 0
-  if dice.empty?
-    return 0
-  end
-  checked_values = []
-  dice.each do |element|
+  dice.uniq.each do |element|
     element_count = dice.count(element)
-    next if checked_values.include? element
-    score += get_points(element, element_count)
-    checked_values << element
+    score += points(element, element_count)
   end
   return score
 end
 
-def get_points(element, element_count)
-  points = 0
+def points(element, element_count)
+  count_module = element_count % 3
   case element
   when 1
-    element_count >= 3 ?
-    points = 1000 + (element_count % 3) * 100 :
-    points = element_count * 100
+    element_count >= 3 ? 1000 + count_module * 100 : element_count * 100
   when 5
-    element_count >= 3 ?
-    points = 500 * (element_count / 3) + 50 * (element_count % 3) :
-    points = element_count * 50
+    element_count >= 3 ? 500 + 50 * count_module : element_count * 50
   else
-    element_count >= 3 ?
-    points = element * 100 :
-    points = 0
+    element_count >= 3 ? element * 100 : 0
   end
-  return points
 end
 
 class AboutScoringProject < Neo::Koan
